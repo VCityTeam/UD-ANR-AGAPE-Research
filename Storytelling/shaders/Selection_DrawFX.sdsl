@@ -1,0 +1,27 @@
+shader Selection_DrawFX : ShaderBase, PositionStream4, NormalStream, Transformation, Texturing
+
+{
+    
+    float3 Color = float3(0.0,0.3,1.0);
+    float Shift = 0.0;
+
+    override void VSMain(){
+
+        streams.ShadingPosition = mul(streams.Position, WorldViewProjection);
+
+        
+    }
+
+
+
+
+    override void PSMain(){
+        streams.meshNormal  = - streams.meshNormal ;
+
+        float Alpha = lerp(1.0,0.0, saturate(streams.TexCoord.y + Shift));
+
+        streams.ColorTarget = float4(Color, Alpha);
+    }
+
+
+};

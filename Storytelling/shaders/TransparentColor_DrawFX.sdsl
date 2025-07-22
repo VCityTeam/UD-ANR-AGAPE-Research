@@ -1,0 +1,26 @@
+shader TransparentColor_DrawFX : ShaderBase, PositionStream4, NormalStream, Transformation, Texturing
+
+{
+    
+    float3 Color = float3(0.0,0.3,1.0);
+    float Alpha = 0.0;
+
+    override void VSMain(){
+
+        streams.ShadingPosition = mul(streams.Position, WorldViewProjection);
+
+        
+    }
+
+
+
+
+    override void PSMain(){
+
+     
+
+        streams.ColorTarget = float4(Color, Alpha);
+    }
+
+
+};

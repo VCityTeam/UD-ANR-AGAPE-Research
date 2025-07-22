@@ -1,0 +1,27 @@
+shader QuantityBar_DrawFX : ShaderBase, PositionStream4, NormalStream, Transformation, Texturing
+
+{
+    
+    float3 Color1 = float3(0.0,0.3,1.0);
+    float3 Color2 = float3(0.0,0.3,1.0);
+    float Aplha = 1.0;
+    override void VSMain(){
+
+        streams.ShadingPosition = mul(streams.Position, WorldViewProjection);
+
+        
+    }
+
+
+
+
+    override void PSMain(){
+       
+
+        float3 Color = lerp(Color1, Color2, streams.TexCoord.y);
+
+        streams.ColorTarget = float4(Color, Aplha);
+    }
+
+
+};
